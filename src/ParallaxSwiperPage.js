@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { View, Animated, StyleSheet, Dimensions } from 'react-native';
+import { View, Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-
-const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 class ParallaxSwiperPage extends Component {
   setPageSize = ({ nativeEvent }) => {

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { View, Animated, StyleSheet, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
-import ParallaxSwiperPage, {
-  ParallaxSwiperPagePropTypes,
-} from './ParallaxSwiperPage';
+import ParallaxSwiperPage from './ParallaxSwiperPage';
 
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
@@ -24,8 +22,8 @@ class ParallaxSwiper extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.scrollToIndex(nextProps.scrollToIndex);
+  componentDidUpdate() {
+    this.scrollToIndex(this.props.scrollToIndex);
   }
 
   onScrollEnd(e) {
@@ -55,7 +53,7 @@ class ParallaxSwiper extends Component {
       this.animatedScrollViewHasScrolled = true;
     }
 
-    this.animatedScrollView._component.scrollTo({
+    this.animatedScrollView.scrollTo({
       x: vertical ? 0 : scrollOffset,
       y: vertical ? scrollOffset : 0,
       animated,
@@ -221,7 +219,7 @@ ParallaxSwiper.propTypes = {
   showsHorizontalScrollIndicator: PropTypes.bool,
   onMomentumScrollEnd: PropTypes.func,
   children: PropTypes.arrayOf((propValue, key, componentName) => {
-    const childComponentName = propValue[key].type.displayName;
+    const childComponentName = propValue[key].type.name;
     if (!/ParallaxSwiperPage/.test(childComponentName)) {
       return new Error(
         `Invalid component '${childComponentName}' supplied to ${componentName}. Use 'ParallaxSwiperPage' instead.`,
